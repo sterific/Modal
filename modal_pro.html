@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Modal</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+    <style>
+        html,body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        h1,p{
+            font-family: 'Indie Flower', cursive;
+        }
+        html{
+            background-image: url("back.jpg");
+            background-size: cover;
+            font-size: 30px;
+        }
+        .button{
+            padding: 5px 25px;
+            background-color: #cc4331;
+            font-size: 22px;
+            line-height: 44px;
+            outline: 0 !important;
+            box-shadow: 0 4px 0 #af3a2a, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
+            border-radius: 4px;
+            margin-top: -4px;
+
+
+            transition: all 0.25s ease-in-out;
+        }
+        .accept{
+            background-color: chartreuse;
+            box-shadow: 0 4px 0 white, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
+            margin-right: 20px;
+        }
+        
+        .close{
+            background-color: crimson;
+            box-shadow: 0 4px 0 whitesmoke, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
+
+        }
+        .button:hover{
+            cursor:pointer;
+            background-color: #c25544;
+            box-shadow: 0 4px 0 #c4402f, 0 5px 5px 1px rgba(0, 0, 0, 0.8);
+        }
+        .accept:hover{
+            background-color: whitesmoke;
+            box-shadow: 0 4px 0  chartreuse, 0 5px 5px 1px rgba(0, 0, 0, 0.8);
+        }
+        .close:hover{
+            background-color: whitesmoke;
+            box-shadow: 0 4px 0  crimson, 0 5px 5px 1px rgba(0, 0, 0, 0.8);
+        }
+        .button:active{
+            margin-top: 0px;
+            box-shadow: 0;
+        }
+
+        .main-button{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) ;
+        }
+        #modal-back{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -10;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out,z-index 0.3s ease-in-out;
+        }
+        #modal-back.active{
+            z-index: 5;
+            opacity: 1;
+        }
+        #modal-box{
+            background-color: blanchedalmond;
+            position: fixed;
+            padding: 35px;
+            top: 50%;
+            left: 50%;
+            max-width: 800px;
+            min-width: 600px;
+            z-index: -10;
+            opacity: 0;
+            transform: translate(-50%,-50%) ;
+            transition: opacity 0.3s ease-in-out,z-index 0.3s ease-in-out;
+        }
+        #modal-box.active{
+            z-index: 6;
+            opacity: 1;
+        }
+        
+    </style>
+</head>
+<body>
+    <button type="button" class="button main-button">OPEN MODAL</button>
+    <div id="modal-back"></div>
+    <div id="modal-box">
+        <h1>Simple Modal</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, amet consequuntur. Consequatur rerum optio consequuntur magnam quidem temporibus rem laudantium adipisci iste, iure magni minima?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, amet consequuntur. Consequatur rerum optio consequuntur magnam quidem temporibus rem laudantium adipisci iste, iure magni minima?</p>
+        <div style="text-align: right;">
+            <button type="button" class="button accept js-close">ACCEPT</button>
+            <button type="button" class="button close js-close" >CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        const open=document.querySelector(".main-button");
+        const back=document.getElementById("modal-back");
+        const box=document.getElementById("modal-box");
+        const close=document.querySelectorAll(".js-close")
+        open.addEventListener('click',function(event){
+            event.preventDefault();
+            back.classList.add("active");
+            box.classList.add("active");
+        })
+        close.forEach(node =>{
+            node.addEventListener('click',function(e)
+            {
+                e.preventDefault();
+                back.classList.remove("active");
+                box.classList.remove("active");
+            });
+        })
+
+    </script>
+</body>
+</html>
